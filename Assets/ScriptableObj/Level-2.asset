@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1b61f8c1b4c104b8111e07e6c493bd, type: 3}
+  m_Name: Level-2
+  m_EditorClassIdentifier: 
+  mapIndex: 1
+  mapName: Level-2
+  mapImage: {fileID: -3571278149730965589, guid: 855035d89a8532849b490d77f8c81106, type: 3}
+  sceneToLoad: {fileID: 102900000, guid: 49e1d02386935f145ad5093d46f71429, type: 3}
