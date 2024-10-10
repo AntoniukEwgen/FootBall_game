@@ -1,0 +1,93 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\GitHub\\FootBall_game\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A6635831-8955-AB37-FF63-15F2DF7EC798}|Assembly-CSharp.csproj|d:\\github\\football_game\\assets\\script\\shop\\energyshop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6635831-8955-AB37-FF63-15F2DF7EC798}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\shop\\energyshop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6635831-8955-AB37-FF63-15F2DF7EC798}|Assembly-CSharp.csproj|D:\\GitHub\\FootBall_game\\assets\\script\\ui\\energymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6635831-8955-AB37-FF63-15F2DF7EC798}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\ui\\energymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6635831-8955-AB37-FF63-15F2DF7EC798}|Assembly-CSharp.csproj|D:\\GitHub\\FootBall_game\\assets\\script\\shop\\selected.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6635831-8955-AB37-FF63-15F2DF7EC798}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\shop\\selected.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6635831-8955-AB37-FF63-15F2DF7EC798}|Assembly-CSharp.csproj|D:\\GitHub\\FootBall_game\\assets\\script\\shop\\shop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6635831-8955-AB37-FF63-15F2DF7EC798}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\shop\\shop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 288,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Shop.cs",
+              "DocumentMoniker": "D:\\GitHub\\FootBall_game\\Assets\\Script\\Shop\\Shop.cs",
+              "RelativeDocumentMoniker": "Assets\\Script\\Shop\\Shop.cs",
+              "ToolTip": "D:\\GitHub\\FootBall_game\\Assets\\Script\\Shop\\Shop.cs",
+              "RelativeToolTip": "Assets\\Script\\Shop\\Shop.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAwwBcAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-10T12:27:01.818Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Selected.cs",
+              "DocumentMoniker": "D:\\GitHub\\FootBall_game\\Assets\\Script\\Shop\\Selected.cs",
+              "RelativeDocumentMoniker": "Assets\\Script\\Shop\\Selected.cs",
+              "ToolTip": "D:\\GitHub\\FootBall_game\\Assets\\Script\\Shop\\Selected.cs",
+              "RelativeToolTip": "Assets\\Script\\Shop\\Selected.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-10T12:22:58.378Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EnergyManager.cs",
+              "DocumentMoniker": "D:\\GitHub\\FootBall_game\\Assets\\Script\\UI\\EnergyManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Script\\UI\\EnergyManager.cs",
+              "ToolTip": "D:\\GitHub\\FootBall_game\\Assets\\Script\\UI\\EnergyManager.cs",
+              "RelativeToolTip": "Assets\\Script\\UI\\EnergyManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-10T12:20:08.682Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EnergyShop.cs",
+              "DocumentMoniker": "D:\\GitHub\\FootBall_game\\Assets\\Script\\Shop\\EnergyShop.cs",
+              "RelativeDocumentMoniker": "Assets\\Script\\Shop\\EnergyShop.cs",
+              "ToolTip": "D:\\GitHub\\FootBall_game\\Assets\\Script\\Shop\\EnergyShop.cs",
+              "RelativeToolTip": "Assets\\Script\\Shop\\EnergyShop.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-10T11:48:52.207Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -31,7 +29,7 @@ public class MainMenuManager : MonoBehaviour
 
     void Start()
     {
-        AudioManager.Instance.AddButtonSound();
+        SoundManager.Instance.RegisterButtonSounds();
 
         PanelActive();
         LoadCoins();

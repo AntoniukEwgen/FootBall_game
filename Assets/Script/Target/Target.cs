@@ -1,7 +1,7 @@
 using System.Collections;
-using UnityEngine;
-using TMPro;
 using System.Threading;
+using TMPro;
+using UnityEngine;
 
 public class Target : MonoBehaviour
 {
@@ -47,7 +47,7 @@ public class Target : MonoBehaviour
         if (other.gameObject.CompareTag("Ball") && !ballTriggered)
         {
             ballTriggered = true;
-            AudioManager.Instance.PlaySound(winner);
+            SoundManager.Instance.PlaySound(winner);
             Debug.Log("ћ'€ч потрапив у ц≥ль!");
             Interlocked.Increment(ref hitCount);
             YouValue.text = FormatCount(hitCount);

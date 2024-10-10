@@ -1,71 +1,69 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
-using DG.Tweening;
-using DG.Tweening.Core.Easing;
 
-public class Ball : MonoBehaviour
+public class BallController : MonoBehaviour
 {
-    [SerializeField] private Transform minPoint;
-    [SerializeField] private Transform maxPoint;
-    [SerializeField] private SpriteRenderer shadow; 
-    [SerializeField] private float speed = 1.0f;
-    [SerializeField] GameManager gameManager;
-    [SerializeField] private AudioClip _moveClip;
+    [SerializeField] private Transform _minBoundaryPoint;
+    [SerializeField] private Transform _maxBoundaryPoint;
+    [SerializeField] private SpriteRenderer _shadowRenderer;
+    [SerializeField] private float _movementSpeed = 1.0f;
+    [SerializeField] private GameManager _gameManager;
+    [SerializeField] private AudioClip _movementSoundClip;
 
-    private Vector2 startSwipe;
-    private Vector2 endSwipe;
-    private bool isSwipeOnBall;
-    private readonly float initialScale = 0.26f;
-    private readonly float finalScale = 0.08f;
-    private readonly float maxAlpha = 130f / 255f; 
-
+    private Vector2 _startSwipePosition;
+    private Vector2 _endSwipePosition;
+    private bool _isSwipeOnBall;
+    private const float InitialBallScale = 0.26f;
+    private const float TargetBallScale = 0.08f;
+    private const float MaxShadowAlpha = 130f / 255f;
 
     public static event Action<Vector2> OnBallStopped = delegate { };
 
-    void Start()
+    private void Start()
     {
-        transform.localScale = new Vector3(initialScale, initialScale, initialScale);
-        shadow.color = new Color(shadow.color.r, shadow.color.g, shadow.color.b, maxAlpha);
+        transform.localScale = Vector3.one * InitialBallScale;
+        _shadowRenderer.color = new Color(_shadowRenderer.color.r, _shadowRenderer.color.g, _shadowRenderer.color.b, MaxShadowAlpha);
     }
-    void Update()
+
+    private void Update()
     {
-        if (gameManager.isPaused || (gameManager.tutorial != null && gameManager.tutorial.activeSelf))
+        if (_gameManager.isPaused || (_gameManager.tutorial != null && _gameManager.tutorial.activeSelf))
         {
-            AudioManager.Instance.StopSound(_moveClip);
+            SoundManager.Instance.StopSound(_movementSoundClip);
             return;
         }
 
         if (Input.GetMouseButtonDown(0))
         {
-            startSwipe = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-            isSwipeOnBall = IsSwipeOnBall(startSwipe);
+            _startSwipePosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+            _isSwipeOnBall = IsSwipeOnBall(_startSwipePosition);
         }
 
-        if (Input.GetMouseButtonUp(0) && isSwipeOnBall)
+        if (Input.GetMouseButtonUp(0) && _isSwipeOnBall)
         {
-            endSwipe = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-            AudioManager.Instance.PlaySound(_moveClip);
+            _endSwipePosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+            SoundManager.Instance.PlaySound(_movementSoundClip);
             Swipe();
         }
     }
 
-    bool IsSwipeOnBall(Vector2 swipeStart)
+    private bool IsSwipeOnBall(Vector2 swipeStart)
     {
         Vector3 ballPosition = Camera.main.WorldToViewportPoint(transform.position);
         float distance = Vector2.Distance(swipeStart, ballPosition);
         return distance <= 0.2f;
     }
 
-    void Swipe()
+    private void Swipe()
     {
-        Vector2 swipe = endSwipe - startSwipe;
-        if (swipe.y < 0)
-            return;
+        Vector2 swipe = _endSwipePosition - _startSwipePosition;
+        if (swipe.y < 0) return;
 
         float swipeAngle = Vector2.SignedAngle(Vector2.right, swipe);
         float swipeForce = swipe.magnitude;
-        Vector2 targetPosition = Vector2.Lerp(minPoint.position, maxPoint.position, swipeForce);
+        Vector2 targetPosition = Vector2.Lerp(_minBoundaryPoint.position, _maxBoundaryPoint.position, swipeForce);
 
         targetPosition.x += Mathf.Cos(swipeAngle * Mathf.Deg2Rad) * swipeForce;
         targetPosition.y += Mathf.Sin(swipeAngle * Mathf.Deg2Rad) * swipeForce;
@@ -73,39 +71,41 @@ public class Ball : MonoBehaviour
         StartCoroutine(MoveToTarget(targetPosition));
     }
 
-    IEnumerator MoveToTarget(Vector2 target, bool isReturning = false)
+    private IEnumerator MoveToTarget(Vector2 target, bool isReturning = false)
     {
-        float duration = Vector2.Distance((Vector2)transform.position, target) / speed;
-        transform.DOScale(finalScale, duration);
+        float duration = Vector2.Distance(transform.position, target) / _movementSpeed;
+        transform.DOScale(TargetBallScale, duration);
 
-        shadow.DOFade(isReturning ? maxAlpha : 0, duration);
+        _shadowRenderer.DOFade(isReturning ? MaxShadowAlpha : 0, duration);
 
         while ((Vector2)transform.position != target)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-            if (transform.position.y > maxPoint.position.y)
+            transform.position = Vector2.MoveTowards(transform.position, target, _movementSpeed * Time.deltaTime);
+
+            if (transform.position.y > _maxBoundaryPoint.position.y)
             {
-                transform.position = new Vector2(transform.position.x, maxPoint.position.y);
+                transform.position = new Vector2(transform.position.x, _maxBoundaryPoint.position.y);
                 if (!isReturning)
                 {
-                    OnBallStopped(transform.position);
+                    OnBallStopped?.Invoke(transform.position);
                 }
                 break;
             }
             yield return null;
         }
 
-        if (!isReturning && (Vector2)transform.position == target && transform.position.y <= maxPoint.position.y && transform.position.y >= minPoint.position.y)
+        if (!isReturning && (Vector2)transform.position == target &&
+            transform.position.y <= _maxBoundaryPoint.position.y &&
+            transform.position.y >= _minBoundaryPoint.position.y)
         {
-            OnBallStopped(transform.position); 
+            OnBallStopped?.Invoke(transform.position);
         }
 
-        if (transform.position.y > minPoint.position.y)
+        if (transform.position.y > _minBoundaryPoint.position.y)
         {
             yield return new WaitForSeconds(0.1f);
-            Vector2 minPointWithCurrentX = new(transform.position.x, minPoint.position.y);
+            Vector2 minPointWithCurrentX = new(transform.position.x, _minBoundaryPoint.position.y);
             StartCoroutine(MoveToTarget(minPointWithCurrentX, true));
         }
     }
-
 }

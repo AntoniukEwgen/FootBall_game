@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a9bbbe2cf408fe54fa35a560c77f937d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _effectAudioSource: {instanceID: 0}
+  - _musicAudioSource: {instanceID: 0}
+  - _buttonClickSound: {fileID: 8300000, guid: c0800512f8116a8478688feb9511da39, type: 3}
+  - _backgroundMusicClip: {fileID: 8300000, guid: 17b3470e3e9ab784e8cdedd70bd894e9, type: 3}
+  - _effectVolumeSlider: {instanceID: 0}
+  - _musicVolumeSlider: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

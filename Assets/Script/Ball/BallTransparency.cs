@@ -1,15 +1,14 @@
-using System;
-using UnityEngine;
 using DG.Tweening;
 using System.Collections;
 using TMPro;
+using UnityEngine;
 
 public class BallTransparency : MonoBehaviour
 {
-    [SerializeField] private Ball ball;
+    [SerializeField] private BallController ballController;
     [SerializeField] private TextMeshProUGUI spawnText;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private BallCoins coinInteraction;
+    [SerializeField] private CoinCollectorHandler coinInteraction;
     [SerializeField] private Target target;
     [SerializeField] private AudioClip lose;
 
@@ -24,13 +23,13 @@ public class BallTransparency : MonoBehaviour
     private void Start()
     {
         spawnText.text = MaxSpins.ToString();
-        Ball.OnBallStopped += HandleBallStopped;
-        ballRenderer = ball.GetComponent<SpriteRenderer>();
+        BallController.OnBallStopped += HandleBallStopped;
+        ballRenderer = ballController.GetComponent<SpriteRenderer>();
     }
 
     private void OnDestroy()
     {
-        Ball.OnBallStopped -= HandleBallStopped;
+        BallController.OnBallStopped -= HandleBallStopped;
         Target.OnBallHitTarget -= HandleBallHitTarget;
     }
 
@@ -50,7 +49,7 @@ public class BallTransparency : MonoBehaviour
 
         ballRenderer.DOFade(0f, transparencySpeed).OnComplete(() =>
         {
-            if (!coinInteraction.IsCoinTriggered() && !target.IsBallTriggered())
+            if (!coinInteraction.IsCoinCollected() && !target.IsBallTriggered())
             {
                 currentSpins++;
 
@@ -66,7 +65,7 @@ public class BallTransparency : MonoBehaviour
 
                 if (currentSpins >= MaxSpins)
                 {
-                    AudioManager.Instance.PlaySound(lose);
+                    SoundManager.Instance.PlaySound(lose);
                     gameManager.LoseGame();
                 }
 
@@ -77,7 +76,7 @@ public class BallTransparency : MonoBehaviour
                 ResetBallPositionAndScale();
                 ballRenderer.DOFade(1f, transparencySpeed);
 
-                coinInteraction.ResetCoinTriggered();
+                coinInteraction.ResetCoinCollectedStatus();
                 target.ResetBallTriggered();
             }
         });
@@ -86,8 +85,8 @@ public class BallTransparency : MonoBehaviour
     private void ResetBallPositionAndScale()
     {
         Vector3 newPosition = new Vector3(0f, -2.3f, 0f);
-        ball.transform.position = newPosition;
-        ball.transform.localScale = new Vector3(0.26f, 0.26f, 0.26f);
+        ballController.transform.position = newPosition;
+        ballController.transform.localScale = new Vector3(0.26f, 0.26f, 0.26f);
     }
 
     private void UpdateSpawnText()

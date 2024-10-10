@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,7 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
-    [SerializeField] private BallCoins ballCoin;
+    [SerializeField] private CoinCollectorHandler ballCoin;
     public GameObject tutorial;
 
     [Header("Coin Counter")]
@@ -21,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        AudioManager.Instance.AddButtonSound();
+        SoundManager.Instance.RegisterButtonSounds();
         InitializePanels();
         sceneData = new SceneData();
         sceneData.LoadSceneData();
@@ -77,10 +76,10 @@ public class GameManager : MonoBehaviour
 
     private void ResetCoinCount()
     {
-        BallCoins coin = ballCoin;
+        CoinCollectorHandler coin = ballCoin;
         if (coin != null)
         {
-            coin.ResetCoinCount();
+            coin.ResetBalance();
         }
         else
         {
@@ -99,20 +98,20 @@ public class GameManager : MonoBehaviour
     private void SaveCoins()
     {
         int totalCoins = PlayerPrefs.GetInt("TotalCoins", 0);
-        BallCoins coin = ballCoin;
+        CoinCollectorHandler coin = ballCoin;
         if (coin != null)
         {
-            totalCoins += coin.CoinCount;
+            totalCoins += coin.Balance;
         }
         PlayerPrefs.SetInt("TotalCoins", totalCoins);
     }
 
     private void DisplayWinText()
     {
-        BallCoins coin = ballCoin;
+        CoinCollectorHandler coin = ballCoin;
         if (coin != null)
         {
-            winText.text = coin.CoinCount.ToString();
+            winText.text = coin.Balance.ToString();
         }
         else
         {

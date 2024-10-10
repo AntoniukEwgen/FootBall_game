@@ -1,6 +1,5 @@
-using UnityEngine;
 using System.Collections;
-using System;
+using UnityEngine;
 
 public class GoalAnimation : MonoBehaviour
 {
@@ -16,12 +15,12 @@ public class GoalAnimation : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        Ball.OnBallStopped += StartAnimation; 
+        BallController.OnBallStopped += StartAnimation; 
     }
 
     void OnDestroy()
     {
-        Ball.OnBallStopped -= StartAnimation; 
+        BallController.OnBallStopped -= StartAnimation; 
     }
 
     void StartAnimation(Vector2 ballPosition)

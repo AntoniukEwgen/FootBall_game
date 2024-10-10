@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class EnergyShop : MonoBehaviour
 {
@@ -17,15 +16,14 @@ public class EnergyShop : MonoBehaviour
 
     private void Update()
     {
-        int totalCoins = PlayerPrefs.GetInt("TotalCoins", 0);
-        buyEnergyButton.interactable = totalCoins >= energyCost;
+        buyEnergyButton.interactable = PlayerPrefs.GetInt("TotalCoins", 0) >= energyCost;
     }
 
     public void BuyEnergy()
     {
         if (energyManager.CurrentEnergy >= energyManager.MaxEnergy)
         {
-            Debug.Log("У вас вже є максимальна кількість енергії");
+            Debug.Log("You already have maximum energy levels!");
             return;
         }
 
@@ -41,7 +39,7 @@ public class EnergyShop : MonoBehaviour
         }
         else
         {
-            Debug.Log("Недостатньо монет для покупки енергії");
+            Debug.Log("Not enough coins to make a purchase!");
         }
     }
 }
